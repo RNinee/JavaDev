@@ -1,0 +1,188 @@
+# ===============================================
+# Git Ignore for JMERN Project
+# (MERN Stack + Java Spring Boot)
+# ===============================================
+
+# ===== Node.js / MERN Backend =====
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+.pnpm-debug.log*
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+*.env
+
+# Logs
+logs/
+*.log
+
+# OS Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+
+# ===== React / Client =====
+client/node_modules/
+client/build/
+client/dist/
+client/.pnpm-store/
+
+# React testing
+client/coverage/
+client/.nyc_output/
+
+# React misc
+client/.eslintcache
+client/.parcel-cache/
+
+# ===== Java / Spring Boot =====
+server/devconnector/target/
+server/devconnector/.mvn/
+server/devconnector/mvnw
+server/devconnector/mvnw.cmd
+
+# Gradle
+server/devconnector/.gradle/
+server/devconnector/build/
+server/devconnector/gradle/
+server/devconnector/gradlew
+server/devconnector/gradlew.bat
+
+# Spring Boot specific
+server/devconnector/HELP.md
+server/devconnector/.apt_generated/
+server/devconnector/.factorypath
+server/devconnector/.settings/
+server/devconnector/.springBeans
+server/devconnector/.sts4-cache/
+
+# ===== IDE Files =====
+
+# IntelliJ IDEA
+server/devconnector/.idea/
+server/devconnector/*.iws
+server/devconnector/*.iml
+server/devconnector/*.ipr
+server/devconnector/out/
+*.idea/
+*.iml
+
+# Eclipse
+server/devconnector/.classpath
+server/devconnector/.project
+server/devconnector/.settings/
+server/devconnector/bin/
+
+# VS Code
+.vscode/
+.history/
+*.code-workspace
+
+# NetBeans
+server/devconnector/nbproject/
+server/devconnector/nbbuild/
+server/devconnector/nbdist/
+
+# ===== Compiled Files =====
+*.class
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# ===== Package Files =====
+*.7z
+*.dmg
+*.gz
+*.iso
+*.tar
+*.tgz
+
+# ===== Security & Secrets =====
+config/default.json
+config/production.json
+server/devconnector/src/main/resources/application.properties
+server/devconnector/src/main/resources/application-prod.properties
+server/devconnector/src/main/resources/application-local.properties
+server/devconnector/src/main/resources/application-dev.properties
+
+# Keys and certificates
+*.pem
+*.key
+*.cert
+*.p12
+*.jks
+*.keystore
+
+# ===== Database =====
+*.db
+*.sqlite
+*.sqlite3
+data/
+mongodb-data/
+
+# ===== Test Coverage =====
+coverage/
+*.lcov
+.nyc_output/
+htmlcov/
+*.cover
+*.py,cover
+
+# ===== Temporary Files =====
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+.tmp/
+temp/
+
+# ===== Build Artifacts =====
+dist/
+build/
+out/
+
+# ===== Documentation =====
+# Uncomment if you don't want to commit generated docs
+# docs/_build/
+# site/
+
+# ===== Mobile (if applicable) =====
+*.apk
+*.aab
+*.ipa
+
+# ===== Misc =====
+*.bak
+*.cache
+*.pid
+*.seed
+*.pid.lock
+.npm/
+.yarn/
+
+# ===== Keep Important Files =====
+# Use ! to negate ignore (force include)
+!.gitkeep
+!.mvn/wrapper/maven-wrapper.jar
+!gradle/wrapper/gradle-wrapper.jar
+
+# ===== Project Specific =====
+# Add any project-specific ignores below
+uploads/
+public/uploads/
