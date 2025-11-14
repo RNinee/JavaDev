@@ -186,3 +186,7 @@ out/
 # Add any project-specific ignores below
 uploads/
 public/uploads/
+
+API_ENDPOINTS.md
+JAVA_SPRING_CONVERSION_GUIDE.md
+jmern/server/devconnector/src/main/resources/application.properties
