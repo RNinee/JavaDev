@@ -1,12 +1,8 @@
 package com.springboot.devconnector.services;
 
-import com.springboot.devconnector.dto.auth.AuthResponse;
-import com.springboot.devconnector.dto.auth.LoginRequest;
-import com.springboot.devconnector.dto.auth.RegisterRequest;
-import com.springboot.devconnector.dto.user.UserResponse;
-import com.springboot.devconnector.models.User;
-import com.springboot.devconnector.repositories.UserRepository;
-import com.springboot.devconnector.security.JwtTokenProvider;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -14,13 +10,14 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.time.LocalDateTime;
-import java.util.HashMap;
-import java.util.Map;
+import com.springboot.devconnector.dto.auth.AuthResponse;
+import com.springboot.devconnector.dto.auth.LoginRequest;
+import com.springboot.devconnector.dto.auth.RegisterRequest;
+import com.springboot.devconnector.dto.user.UserResponse;
+import com.springboot.devconnector.models.User;
+import com.springboot.devconnector.repositories.UserRepository;
+import com.springboot.devconnector.security.JwtTokenProvider;
 
 @Service
 public class AuthService {

@@ -29,6 +29,10 @@ public class CustomUserDetailsService implements UserDetailsService {
     }
 
     public UserDetails loadUserById(String id) {
+        if(id.isEmpty()) {
+            throw new UsernameNotFoundException("User ID is empty");
+
+        }
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found with id: " + id));
 

@@ -1,5 +1,13 @@
 package com.springboot.devconnector.services;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.springboot.devconnector.dto.profile.ProfileRequest;
 import com.springboot.devconnector.dto.profile.ProfileResponse;
 import com.springboot.devconnector.dto.user.UserResponse;
@@ -9,13 +17,6 @@ import com.springboot.devconnector.models.Profile;
 import com.springboot.devconnector.models.User;
 import com.springboot.devconnector.repositories.ProfileRepository;
 import com.springboot.devconnector.repositories.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class ProfileService {
@@ -27,6 +28,11 @@ public class ProfileService {
     private UserRepository userRepository;
 
     public ProfileResponse createOrUpdateProfile(String userId, ProfileRequest profileRequest) {
+
+        if(userId == null) {
+            throw new RuntimeException("User ID cannot be null");
+
+        }
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
@@ -68,6 +74,10 @@ public class ProfileService {
     }
 
     public void deleteProfile(String userId) {
+        if(userId == null) {
+            throw new RuntimeException("User ID cannot be null");
+
+        }
         profileRepository.deleteByUserId(userId);
         userRepository.deleteById(userId);
     }

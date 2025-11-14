@@ -1,15 +1,16 @@
 package com.springboot.devconnector.dto.profile;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import com.fasterxml.jackson.annotation.JsonSetter;
 import com.springboot.devconnector.models.Education;
 import com.springboot.devconnector.models.Experience;
 import com.springboot.devconnector.models.Social;
+
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class ProfileRequest {
 
@@ -35,7 +36,8 @@ public class ProfileRequest {
     }
 
     // All-args constructor
-    public ProfileRequest(String company, String website, String location, String status, List<String> skills, String bio, String githubUsername, List<Experience> experience, List<Education> education, Social social) {
+    public ProfileRequest(String company, String website, String location, String status, List<String> skills,
+            String bio, String githubUsername, List<Experience> experience, List<Education> education, Social social) {
         this.company = company;
         this.website = website;
         this.location = location;
@@ -98,9 +100,12 @@ public class ProfileRequest {
                     .map(String::trim)
                     .filter(s -> !s.isEmpty())
                     .collect(Collectors.toList());
-        } else if (skills instanceof List) {
-            // If it's already a list, use it directly
-            this.skills = (List<String>) skills;
+        } else if (skills instanceof List<?>) {
+            // If it's already a list, convert it to List<String>
+            List<?> rawList = (List<?>) skills;
+            this.skills = rawList.stream()
+                    .map(Object::toString)
+                    .collect(Collectors.toList());
         }
     }
 
