@@ -1,0 +1,29 @@
+spring.application.name=DevConnector
+
+# MongoDB Configuration
+# Replace with your MongoDB Atlas connection string
+spring.data.mongodb.uri=mongodb+srv://<username>:<password>@<cluster>.mongodb.net/<database>?retryWrites=true&w=majority&appName=<appname>
+
+# JWT Configuration
+# Generate a strong random secret key (use: openssl rand -base64 64)
+app.jwtSecret=YOUR_VERY_LONG_AND_SECURE_SECRET_KEY_HERE
+app.jwtExpirationInMs=360000
+
+# Server Port
+server.port=5001
+
+# Logging
+logging.level.org.springframework.security=DEBUG
+logging.level.org.springframework.web=DEBUG
+logging.level.com.springboot.devconnector=DEBUG
+logging.level.root=INFO
+
+# Show full error messages in responses (for development)
+server.error.include-message=always
+server.error.include-binding-errors=always
+server.error.include-stacktrace=always
+server.error.include-exception=true
+
+# Spring Boot DevTools - Auto Restart Configuration
+spring.devtools.restart.enabled=true
+spring.devtools.livereload.enabled=true
