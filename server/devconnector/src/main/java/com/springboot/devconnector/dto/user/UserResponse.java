@@ -1,14 +1,7 @@
 package com.springboot.devconnector.dto.user;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 import java.time.LocalDateTime;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class UserResponse {
 
     private String id;
@@ -16,4 +9,58 @@ public class UserResponse {
     private String email;
     private String avatar;
     private LocalDateTime date;
+
+    // No-args constructor
+    public UserResponse() {
+    }
+
+    // All-args constructor
+    public UserResponse(String id, String name, String email, String avatar, LocalDateTime date) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.avatar = avatar;
+        this.date = date;
+    }
+
+    // Getters and Setters
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+    public LocalDateTime getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDateTime date) {
+        this.date = date;
+    }
 }

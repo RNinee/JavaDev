@@ -3,6 +3,8 @@ package com.springboot.devconnector.services;
 import com.springboot.devconnector.dto.profile.ProfileRequest;
 import com.springboot.devconnector.dto.profile.ProfileResponse;
 import com.springboot.devconnector.dto.user.UserResponse;
+import com.springboot.devconnector.models.Education;
+import com.springboot.devconnector.models.Experience;
 import com.springboot.devconnector.models.Profile;
 import com.springboot.devconnector.models.User;
 import com.springboot.devconnector.repositories.ProfileRepository;
@@ -11,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -67,6 +70,81 @@ public class ProfileService {
     public void deleteProfile(String userId) {
         profileRepository.deleteByUserId(userId);
         userRepository.deleteById(userId);
+    }
+
+    public ProfileResponse addExperience(String userId, Experience experience) {
+        Profile profile = profileRepository.findByUserId(userId)
+                .orElseThrow(() -> new RuntimeException("Profile not found"));
+
+        List<Experience> experiences = profile.getExperience();
+        if (experiences == null) {
+            experiences = new ArrayList<>();
+        }
+        experiences.add(0, experience); // Add to beginning of array
+        profile.setExperience(experiences);
+
+        profile = profileRepository.save(profile);
+        return convertToResponse(profile);
+    }
+
+    public ProfileResponse deleteExperience(String userId, String expId) {
+        Profile profile = profileRepository.findByUserId(userId)
+                .orElseThrow(() -> new RuntimeException("Profile not found"));
+
+        List<Experience> experiences = profile.getExperience();
+        if (experiences != null) {
+            // Remove experience by index (MongoDB doesn't give us IDs for embedded docs by default)
+            // For now, we'll use the index as the ID
+            try {
+                int index = Integer.parseInt(expId);
+                if (index >= 0 && index < experiences.size()) {
+                    experiences.remove(index);
+                    profile.setExperience(experiences);
+                    profile = profileRepository.save(profile);
+                }
+            } catch (NumberFormatException e) {
+                throw new RuntimeException("Invalid experience ID");
+            }
+        }
+
+        return convertToResponse(profile);
+    }
+
+    public ProfileResponse addEducation(String userId, Education education) {
+        Profile profile = profileRepository.findByUserId(userId)
+                .orElseThrow(() -> new RuntimeException("Profile not found"));
+
+        List<Education> educations = profile.getEducation();
+        if (educations == null) {
+            educations = new ArrayList<>();
+        }
+        educations.add(0, education); // Add to beginning of array
+        profile.setEducation(educations);
+
+        profile = profileRepository.save(profile);
+        return convertToResponse(profile);
+    }
+
+    public ProfileResponse deleteEducation(String userId, String eduId) {
+        Profile profile = profileRepository.findByUserId(userId)
+                .orElseThrow(() -> new RuntimeException("Profile not found"));
+
+        List<Education> educations = profile.getEducation();
+        if (educations != null) {
+            // Remove education by index
+            try {
+                int index = Integer.parseInt(eduId);
+                if (index >= 0 && index < educations.size()) {
+                    educations.remove(index);
+                    profile.setEducation(educations);
+                    profile = profileRepository.save(profile);
+                }
+            } catch (NumberFormatException e) {
+                throw new RuntimeException("Invalid education ID");
+            }
+        }
+
+        return convertToResponse(profile);
     }
 
     private ProfileResponse convertToResponse(Profile profile) {
