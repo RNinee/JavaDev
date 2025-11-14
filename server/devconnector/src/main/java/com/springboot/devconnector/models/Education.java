@@ -1,12 +1,19 @@
 package com.springboot.devconnector.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.springboot.devconnector.utils.FlexibleDateDeserializer;
+import com.springboot.devconnector.utils.ObjectIdSerializer;
+import org.bson.types.ObjectId;
 
 import java.time.LocalDate;
 
 public class Education {
 
+    @JsonProperty("_id")
+    @JsonSerialize(using = ObjectIdSerializer.class)
+    private ObjectId id;
     private String school;
     private String degree;
     private String fieldOfStudy;
@@ -22,10 +29,12 @@ public class Education {
 
     // No-args constructor
     public Education() {
+        this.id = new ObjectId();
     }
 
     // All-args constructor
     public Education(String school, String degree, String fieldOfStudy, LocalDate from, LocalDate to, Boolean current, String description) {
+        this.id = new ObjectId();
         this.school = school;
         this.degree = degree;
         this.fieldOfStudy = fieldOfStudy;
@@ -36,6 +45,14 @@ public class Education {
     }
 
     // Getters and Setters
+    public ObjectId getId() {
+        return id;
+    }
+
+    public void setId(ObjectId id) {
+        this.id = id;
+    }
+
     public String getSchool() {
         return school;
     }

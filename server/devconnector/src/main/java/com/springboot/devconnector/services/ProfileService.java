@@ -103,18 +103,10 @@ public class ProfileService {
 
         List<Experience> experiences = profile.getExperience();
         if (experiences != null) {
-            // Remove experience by index (MongoDB doesn't give us IDs for embedded docs by default)
-            // For now, we'll use the index as the ID
-            try {
-                int index = Integer.parseInt(expId);
-                if (index >= 0 && index < experiences.size()) {
-                    experiences.remove(index);
-                    profile.setExperience(experiences);
-                    profile = profileRepository.save(profile);
-                }
-            } catch (NumberFormatException e) {
-                throw new RuntimeException("Invalid experience ID");
-            }
+            // Remove experience by ObjectId
+            experiences.removeIf(exp -> exp.getId().toString().equals(expId));
+            profile.setExperience(experiences);
+            profile = profileRepository.save(profile);
         }
 
         return convertToResponse(profile);
@@ -141,17 +133,10 @@ public class ProfileService {
 
         List<Education> educations = profile.getEducation();
         if (educations != null) {
-            // Remove education by index
-            try {
-                int index = Integer.parseInt(eduId);
-                if (index >= 0 && index < educations.size()) {
-                    educations.remove(index);
-                    profile.setEducation(educations);
-                    profile = profileRepository.save(profile);
-                }
-            } catch (NumberFormatException e) {
-                throw new RuntimeException("Invalid education ID");
-            }
+            // Remove education by ObjectId
+            educations.removeIf(edu -> edu.getId().toString().equals(eduId));
+            profile.setEducation(educations);
+            profile = profileRepository.save(profile);
         }
 
         return convertToResponse(profile);

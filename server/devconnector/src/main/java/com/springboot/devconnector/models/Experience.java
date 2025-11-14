@@ -1,12 +1,19 @@
 package com.springboot.devconnector.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.springboot.devconnector.utils.FlexibleDateDeserializer;
+import com.springboot.devconnector.utils.ObjectIdSerializer;
+import org.bson.types.ObjectId;
 
 import java.time.LocalDate;
 
 public class Experience {
 
+    @JsonProperty("_id")
+    @JsonSerialize(using = ObjectIdSerializer.class)
+    private ObjectId id;
     private String title;
     private String company;
     private String location;
@@ -22,10 +29,12 @@ public class Experience {
 
     // No-args constructor
     public Experience() {
+        this.id = new ObjectId();
     }
 
     // All-args constructor
     public Experience(String title, String company, String location, LocalDate from, LocalDate to, Boolean current, String description) {
+        this.id = new ObjectId();
         this.title = title;
         this.company = company;
         this.location = location;
@@ -36,6 +45,14 @@ public class Experience {
     }
 
     // Getters and Setters
+    public ObjectId getId() {
+        return id;
+    }
+
+    public void setId(ObjectId id) {
+        this.id = id;
+    }
+
     public String getTitle() {
         return title;
     }
