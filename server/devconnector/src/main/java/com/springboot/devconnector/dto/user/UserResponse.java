@@ -2,8 +2,11 @@ package com.springboot.devconnector.dto.user;
 
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class UserResponse {
 
+    @JsonProperty("_id")
     private String id;
     private String name;
     private String email;
