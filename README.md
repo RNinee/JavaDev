@@ -102,8 +102,3 @@ This repo is a modified version of the classic MERN DevConnector project. The Re
 - **Frontend tests:** `pnpm test`.
 - **Contract reference:** `FRONTEND_ENDPOINTS.md` documents every React action ↔ API route pairing preserved from MERN.
 
-## Helpful Docs
-- `GUIDE.md` – detailed explanation of the Spring Boot architecture and how it maps to the MERN tutorial steps.
-- `FRONTEND_ENDPOINTS.md` – quick lookup for matching React actions to Spring controllers.
-
-This fork is meant to help MERN developers dip into Java without rewriting the UI. Swap backends freely, compare patterns, and ship whichever stack fits your team.*** End Patch_errno 2
