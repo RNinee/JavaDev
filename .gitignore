@@ -115,6 +115,9 @@ server/devconnector/nbdist/
 # ===== Security & Secrets =====
 config/default.json
 config/production.json
+mern/config/default.json
+mern/config/production.json
+mern/config/*.json
 server/devconnector/src/main/resources/application.properties
 server/devconnector/src/main/resources/application-prod.properties
 server/devconnector/src/main/resources/application-local.properties
@@ -187,7 +190,6 @@ out/
 uploads/
 public/uploads/
 
-API_ENDPOINTS.md
-JAVA_SPRING_CONVERSION_GUIDE.md
+FRONTEND_ENDPOINTS.md
 jmern/server/devconnector/src/main/resources/application.properties
 GUIDE.md

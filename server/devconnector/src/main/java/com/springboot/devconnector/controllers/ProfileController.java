@@ -32,6 +32,9 @@ public class ProfileController {
     @Autowired
     private GitHubService gitHubService;
 
+    // @route   GET api/profile/me
+    // @desc    Get current users profile
+    // @access  Private
     @GetMapping("/me")
     public ResponseEntity<ProfileResponse> getCurrentUserProfile(@AuthenticationPrincipal UserDetails userDetails) {
         User user = userRepository.findByEmail(userDetails.getUsername())
@@ -41,6 +44,9 @@ public class ProfileController {
         return ResponseEntity.ok(profile);
     }
 
+    // @route   POST api/profile
+    // @desc    Create or update user profile
+    // @access  Private
     @PostMapping({"", "/"})
     public ResponseEntity<ProfileResponse> createOrUpdateProfile(
             @AuthenticationPrincipal UserDetails userDetails,
@@ -54,18 +60,27 @@ public class ProfileController {
         return ResponseEntity.ok(profile);
     }
 
+    // @route   GET api/profile
+    // @desc    Get all profiles
+    // @access  Public  
     @GetMapping({"", "/"})
     public ResponseEntity<List<ProfileResponse>> getAllProfiles() {
         List<ProfileResponse> profiles = profileService.getAllProfiles();
         return ResponseEntity.ok(profiles);
     }
 
+    // @route   GET api/profile/user/{userId}
+    // @desc    Get profile by user ID
+    // @access  Public
     @GetMapping("/user/{userId}")
     public ResponseEntity<ProfileResponse> getProfileByUserId(@PathVariable String userId) {
         ProfileResponse profile = profileService.getProfileByUserId(userId);
         return ResponseEntity.ok(profile);
     }
 
+    // @route   DELETE api/profile
+    // @desc    Delete profile, user & posts
+    // @access  Private
     @DeleteMapping({"", "/"})
     public ResponseEntity<Void> deleteProfile(@AuthenticationPrincipal UserDetails userDetails) {
         User user = userRepository.findByEmail(userDetails.getUsername())
@@ -75,6 +90,9 @@ public class ProfileController {
         return ResponseEntity.ok().build();
     }
 
+    // @route   PUT api/profile/experience
+    // @desc    Add profile experience
+    // @access  Private
     @PutMapping("/experience")
     public ResponseEntity<ProfileResponse> addExperience(
             @AuthenticationPrincipal UserDetails userDetails,
@@ -87,6 +105,9 @@ public class ProfileController {
         return ResponseEntity.ok(profile);
     }
 
+    // @route   DELETE api/profile/experience/{expId}
+    // @desc    Delete experience from profile
+    // @access  Private
     @DeleteMapping("/experience/{expId}")
     public ResponseEntity<ProfileResponse> deleteExperience(
             @AuthenticationPrincipal UserDetails userDetails,
@@ -99,6 +120,9 @@ public class ProfileController {
         return ResponseEntity.ok(profile);
     }
 
+    // @route   PUT api/profile/education
+    // @desc    Add profile education
+    // @access  Private
     @PutMapping("/education")
     public ResponseEntity<ProfileResponse> addEducation(
             @AuthenticationPrincipal UserDetails userDetails,
@@ -111,6 +135,9 @@ public class ProfileController {
         return ResponseEntity.ok(profile);
     }
 
+    // @route   DELETE api/profile/education/{eduId}
+    // @desc    Delete education from profile
+    // @access  Private
     @DeleteMapping("/education/{eduId}")
     public ResponseEntity<ProfileResponse> deleteEducation(
             @AuthenticationPrincipal UserDetails userDetails,

@@ -19,18 +19,27 @@ public class AuthController {
     @Autowired
     private AuthService authService;
 
+    // @route   POST api/users
+    // @desc    Register user
+    // @access  Public
     @PostMapping("/users")
     public ResponseEntity<AuthResponse> register(@Valid @RequestBody RegisterRequest registerRequest) {
         AuthResponse response = authService.register(registerRequest);
         return ResponseEntity.ok(response);
     }
 
+    // @route   POST api/auth
+    // @desc    Login user & get token
+    // @access  Public
     @PostMapping("/auth")
     public ResponseEntity<AuthResponse> login(@Valid @RequestBody LoginRequest loginRequest) {
         AuthResponse response = authService.login(loginRequest);
         return ResponseEntity.ok(response);
     }
 
+    // @route   GET api/auth
+    // @desc    Get current user
+    // @access  Private
     @GetMapping("/auth")
     public ResponseEntity<UserResponse> getCurrentUser(@AuthenticationPrincipal UserDetails userDetails) {
         UserResponse response = authService.getCurrentUser(userDetails.getUsername());

@@ -1,5 +1,6 @@
 package com.springboot.devconnector.dto.profile;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.springboot.devconnector.dto.user.UserResponse;
 import com.springboot.devconnector.models.Education;
 import com.springboot.devconnector.models.Experience;
@@ -9,7 +10,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public class ProfileResponse {
-
+    @JsonProperty("_id")
     private String id;
     private UserResponse user;
     private String company;
